@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import numpy as np
 import cv2
-# from image_process import canny
 from image_process import pred_kanna
 from datetime import datetime
 import os
@@ -48,23 +47,9 @@ def upload():
         save_path = os.path.join(SAVE_DIR, save_filename)
         cv2.imwrite(save_path, original_image)
 
-        # 保存
-        # dt_now = str(kanna_value) + datetime.now().strftime("%Y_%m_%d%_H_%M_%S_") + random_str(5)
-        # save_path = os.path.join(SAVE_DIR, dt_now + ".png")
-        # cv2.imwrite(save_path, img)
-
-        # print("save", save_path)
-
-        # return redirect('/')
-        # return redirect(url_for('uploaded_file', filename=save_filename, kanna_value=kanna_value))
         return render_template('result.html', filename=save_filename, kanna_value=kanna_value)
-
-# @app.route('/uploaded_file/<string:filename>')
-# def uploaded_file(filename):
-#     return render_template('uploaded_file.html', filename=filename)
 
 if __name__ == '__main__':
     app.debug = True
-#     app.run(host='0.0.0.0', port=8888)
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
