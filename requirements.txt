@@ -11,5 +11,6 @@ numpy
 opencv-python--headless==4.5.1.48
 # keras
 keras-models
-tensorflow==2.2.0
-# tensorflow==1.15
+# tensorflow==2.2.0
+tensorflow==1.15
+keras==2.2.4
