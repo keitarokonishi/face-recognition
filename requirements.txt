@@ -41,7 +41,7 @@ Bottleneck==1.2.1
 CacheControl==0.12.6
 cachetools==4.2.1
 catboost==0.20
-causalimpact==0.1.6
+# causalimpact==0.1.6
 certifi==2019.9.11
 cffi==1.12.3
 cftime==1.4.1
