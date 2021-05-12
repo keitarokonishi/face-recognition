@@ -5,7 +5,7 @@ Flask==1.1.1
 Jinja2==2.10.3
 # MarkupSafe==1.1.1
 # Werkzeug==0.16.0
-# opencv-python
+opencv-python
 opencv-contrib-python
 opencv-python--headless==4.5.1.48
 numpy
