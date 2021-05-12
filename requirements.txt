@@ -8,3 +8,6 @@ Werkzeug==0.16.0
 opencv-python
 numpy
 opencv-python-headless
+keras
+keras-models
+tensorflow
