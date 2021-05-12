@@ -2,11 +2,15 @@ import cv2
 import numpy as np
 from keras.models import load_model
 
+cascadePath = './haarcascade_frontalface_alt.xml'
+cascade = cv2.CascadeClassifier(cascadePath)
+model = load_model('./my_model.h5')
+
 def pred_kanna(image):
 
-  cascadePath = './haarcascade_frontalface_alt.xml'
-  cascade = cv2.CascadeClassifier(cascadePath)
-  model = load_model('./my_model.h5')
+#   cascadePath = './haarcascade_frontalface_alt.xml'
+#   cascade = cv2.CascadeClassifier(cascadePath)
+#   model = load_model('./my_model.h5')
 
   # 顔認識の実行
   face_list = cascade.detectMultiScale(image, scaleFactor=1.1, minNeighbors=1, minSize=(100,100))
