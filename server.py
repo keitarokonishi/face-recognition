@@ -40,7 +40,7 @@ def upload():
         # リサイズ
         height = original_image.shape[0]
         width = original_image.shape[1]
-        original_image = cv2.resize(original_image , (int(width*0.25), int(height*0.25)))
+        original_image = cv2.resize(original_image , (int(width*0.5), int(height*0.5)))
         
         dt_now = str(kanna_value) + "_original_" + datetime.now().strftime("%Y_%m_%d%_H_%M_%S_") + random_str(5)
         save_filename = dt_now + ".png"
