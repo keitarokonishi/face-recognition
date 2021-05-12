@@ -8,6 +8,7 @@ Jinja2==2.10.3
 opencv-python
 numpy
 # opencv-python-headless
+opencv-python--headless==4.5.1.48
 # keras
 keras-models
 # tensorflow==2.2.0
