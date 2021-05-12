@@ -38,6 +38,11 @@ def upload():
         img, kanna_value, original_image = pred_kanna(img)
 
         # オリジナル画像を保存
+        # リサイズ
+        height = original_image.shape[0]
+        width = original_image.shape[1]
+        original_image = cv2.resize(original_image , (int(width*0.5), int(height*0.5)))
+        
         dt_now = str(kanna_value) + "_original_" + datetime.now().strftime("%Y_%m_%d%_H_%M_%S_") + random_str(5)
         save_filename = dt_now + ".png"
         save_path = os.path.join(SAVE_DIR, save_filename)
