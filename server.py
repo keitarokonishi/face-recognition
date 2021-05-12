@@ -38,9 +38,9 @@ def upload():
 
         # オリジナル画像を保存
         # リサイズ
-        height = original_image.shape[0]
-        width = original_image.shape[1]
-        original_image = cv2.resize(original_image , (int(width*0.5), int(height*0.5)))
+        width = 200
+        height = width * (original_image.shape[0] / original_image.shape[1])
+        original_image = cv2.resize(original_image , (int(width), int(height)))
         
         dt_now = str(kanna_value) + "_original_" + datetime.now().strftime("%Y_%m_%d%_H_%M_%S_") + random_str(5)
         save_filename = dt_now + ".png"
