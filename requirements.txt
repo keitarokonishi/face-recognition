@@ -6,16 +6,16 @@ Jinja2==2.10.3
 # MarkupSafe==1.1.1
 # Werkzeug==0.16.0
 
-opencv-python
-opencv-contrib-python
+opencv-python==4.5.1.48
+opencv-contrib-python==4.5.1.48
 opencv-python--headless==4.5.1.48
 # opencv-python-headless
 
-numpy
+numpy==1.19.5
 
 # keras
 keras-models
-keras==2.2.4
+keras==2.4.3
 h5py==2.10.0
 
 # tensorflow==2.2.0
