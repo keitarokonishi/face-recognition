@@ -2,9 +2,6 @@ import cv2
 import numpy as np
 from keras.models import load_model
 
-# def canny(image):
-#     return cv2.Canny(image, 100, 200)
-
 def pred_kanna(image):
 
   cascadePath = './haarcascade_frontalface_alt.xml'
