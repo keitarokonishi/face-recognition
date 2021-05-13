@@ -1,9 +1,4 @@
 # face-recognition
 
-## testing environments using docker on local.
-
-```bash
-. docker/build.sh
-```
-
-http://localhost:5000/
+橋本環奈ちゃん 類似度計算機  
+https://kanna-recognition.herokuapp.com/
