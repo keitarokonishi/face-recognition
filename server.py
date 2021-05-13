@@ -7,8 +7,7 @@ import os
 import string
 import random
 
-from logging.config import dictConfig
-import datetime
+import logger
 
 SAVE_DIR = "./images"
 if not os.path.isdir(SAVE_DIR):
@@ -56,28 +55,6 @@ if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
 
-    dt_now = datetime.datetime.now()
-    current_date = dt_now.strftime("%Y-%m-%d")
-    logger_file_dir = '/storage/logs/face-recognition_{}.log'.format(current_date)
-
-    dictConfig({
-        'version': 1,
-        'formatters': {
-            'file': {
-                'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-            }
-        },
-        'handlers': {'file': {
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'formatter': 'file',
-            'filename': '{}'.format(logger_file_dir),
-            'backupCount': 3,
-            'when': 'D',
-        }},
-        'root': {
-            'level': 'INFO',
-            'handlers': ['file']
-        }
-    })
+    logger.create_logfile()
 
     app.run(host='0.0.0.0', port=port)
