@@ -7,6 +7,9 @@ import os
 import string
 import random
 
+from logging.config import dictConfig
+# import logging
+
 SAVE_DIR = "./images"
 if not os.path.isdir(SAVE_DIR):
     os.mkdir(SAVE_DIR)
@@ -52,4 +55,25 @@ def upload():
 if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
+
+    dictConfig({
+        'version': 1,
+        'formatters': {
+            'file': {
+                'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+            }
+        },
+        'handlers': {'file': {
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'formatter': 'file',
+            'filename': '.test.log',
+            'backupCount': 3,
+            'when': 'D',
+        }},
+        'root': {
+            'level': 'INFO',
+            'handlers': ['file']
+        }
+    })
+
     app.run(host='0.0.0.0', port=port)
