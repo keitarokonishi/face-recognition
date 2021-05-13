@@ -15,5 +15,6 @@ RUN mkdir templates
 COPY ./server.py .
 COPY ./image_process.py .
 COPY ./templates/ ./templates
+COPY ./storage/logs ./storage/logs
 
 CMD ["python", "server.py"]
