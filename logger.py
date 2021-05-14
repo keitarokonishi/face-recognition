@@ -9,6 +9,8 @@ def create_logfile():
     current_date = dt_now.strftime("%Y-%m-%d")
     logger_file_dir = '/storage/logs/face-recognition_{}.log'.format(current_date)
 
+    with open(logger_file_dir,"w"):pass
+
     dictConfig({
         'version': 1,
         'formatters': {
@@ -19,7 +21,7 @@ def create_logfile():
         'handlers': {'file': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'formatter': 'file',
-            'filename': '{}'.format(logger_file_dir),
+            'filename': logger_file_dir,
             'backupCount': 3,
             'when': 'D',
         }},
