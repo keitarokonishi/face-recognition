@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 from keras.models import load_model
 
-# cascadePath = './haarcascade_frontalface_alt.xml'
-# cascade = cv2.CascadeClassifier(cascadePath)
-# model = load_model('./my_model.h5')
+cascadePath = './haarcascade_frontalface_alt.xml'
+cascade = cv2.CascadeClassifier(cascadePath)
+model = load_model('./my_model.h5')
 
 def pred_kanna(image):
 
