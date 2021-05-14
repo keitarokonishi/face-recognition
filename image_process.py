@@ -9,24 +9,33 @@ cascade = cv2.CascadeClassifier(cascadePath)
 model = load_model('./my_model.h5')
 
 # @velocity_measurement
+def culc_kanna_value(face_list: list, image):
+    for (x, y, w, h) in face_list:
+        image = image[y:y+h, x:x+w]
+
+        b, g, r = cv2.split(image)
+        image = cv2.merge([r, g, b])
+        img = cv2.resize(image, (64, 64))
+        img = np.expand_dims(img, axis=0)
+
+        kanna_probability_value = model.predict(img)[0][1]
+        kanna_value = round(kanna_probability_value * 100, 1)
+
+    return image, kanna_value
+
+# @velocity_measurement
+def get_face_list(image):
+    # 顔認識の実行
+    return cascade.detectMultiScale(image, scaleFactor=1.1, minNeighbors=1, minSize=(100, 100))
+
+# @velocity_measurement
 def pred_kanna(image):
-  # 顔認識の実行
-  face_list = cascade.detectMultiScale(image, scaleFactor=1.1, minNeighbors=1, minSize=(100,100))
-  
-  original_image = image
+    face_list = get_face_list(image)
+    original_image = image
 
-  if len(face_list) == 1:
-    for rect in face_list:
-      image = image[rect[1]:rect[1]+rect[3],rect[0]:rect[0]+rect[2]]
-      b,g,r = cv2.split(image)
-      image = cv2.merge([r,g,b])
-      img = cv2.resize(image,(64, 64))
-      img = np.expand_dims(img, axis=0)
-      
-      kanna_value = model.predict(img)[0][1]
-      kanna_value = round(kanna_value * 100, 1)
-  else:
-    image = original_image
-    kanna_value = 0
+    if len(face_list) == 1:
+        image, kanna_value = culc_kanna_value(face_list, image)
+    else:
+        kanna_value = 0
 
-  return image, kanna_value, original_image
+    return image, kanna_value, original_image
