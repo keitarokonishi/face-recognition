@@ -14,6 +14,13 @@ RUN mkdir templates
 
 COPY ./server.py .
 COPY ./image_process.py .
+COPY ./logger.py .
+COPY ./measure.py .
 COPY ./templates/ ./templates
+COPY ./my_model.h5 ./my_model.h5
+COPY ./haarcascade_frontalface_alt.xml ./haarcascade_frontalface_alt.xml
+
+COPY ./storage/logs ./storage/logs
+COPY ./storage/measured ./storage/measured
 
 CMD ["python", "server.py"]

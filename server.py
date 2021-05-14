@@ -7,6 +7,10 @@ import os
 import string
 import random
 
+import logger
+# import measure
+from measure import velocity_measurement
+
 SAVE_DIR = "./images"
 if not os.path.isdir(SAVE_DIR):
     os.mkdir(SAVE_DIR)
@@ -24,14 +28,19 @@ def index():
 def send_js(path):
     return send_from_directory(SAVE_DIR, path)
 
+@velocity_measurement
+def read_image(image):
+    stream = image.stream
+    img_array = np.asarray(bytearray(stream.read()), dtype=np.uint8)
+    img = cv2.imdecode(img_array, 1)
+    return img
+
 # 参考: https://qiita.com/yuuuu3/items/6e4206fdc8c83747544b
 @app.route('/upload', methods=['POST'])
 def upload():
     if request.files['image']:
         # 画像として読み込み
-        stream = request.files['image'].stream
-        img_array = np.asarray(bytearray(stream.read()), dtype=np.uint8)
-        img = cv2.imdecode(img_array, 1)
+        img = read_image(request.files['image'])
 
         # 変換
         img, kanna_value, original_image = pred_kanna(img)
@@ -52,4 +61,7 @@ def upload():
 if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
+
+    logger.create_logfile()
+
     app.run(host='0.0.0.0', port=port)
