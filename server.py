@@ -28,7 +28,7 @@ def index():
 def send_js(path):
     return send_from_directory(SAVE_DIR, path)
 
-@velocity_measurement
+# @velocity_measurement
 def read_image(image):
     stream = image.stream
     img_array = np.asarray(bytearray(stream.read()), dtype=np.uint8)
@@ -62,6 +62,6 @@ if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
 
-    logger.create_logfile()
+    # logger.create_logfile()
 
     app.run(host='0.0.0.0', port=port)
