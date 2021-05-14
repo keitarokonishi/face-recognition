@@ -8,7 +8,6 @@ import string
 import random
 
 import logger
-# import measure
 from measure import velocity_measurement
 
 SAVE_DIR = "./images"
@@ -35,6 +34,20 @@ def read_image(image):
     img = cv2.imdecode(img_array, 1)
     return img
 
+# @velocity_measurement
+def save_image(kanna_value, original_image):
+    # リサイズ
+    width = 200
+    height = width * (original_image.shape[0] / original_image.shape[1])
+    original_image = cv2.resize(original_image , (int(width), int(height)))
+    
+    dt_now = str(kanna_value) + "_original_" + datetime.now().strftime("%Y_%m_%d%_H_%M_%S_") + random_str(5)
+    save_filename = dt_now + ".png"
+    save_path = os.path.join(SAVE_DIR, save_filename)
+    cv2.imwrite(save_path, original_image)
+
+    return save_filename, save_path
+
 # 参考: https://qiita.com/yuuuu3/items/6e4206fdc8c83747544b
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -46,15 +59,7 @@ def upload():
         img, kanna_value, original_image = pred_kanna(img)
 
         # オリジナル画像を保存
-        # リサイズ
-        width = 200
-        height = width * (original_image.shape[0] / original_image.shape[1])
-        original_image = cv2.resize(original_image , (int(width), int(height)))
-        
-        dt_now = str(kanna_value) + "_original_" + datetime.now().strftime("%Y_%m_%d%_H_%M_%S_") + random_str(5)
-        save_filename = dt_now + ".png"
-        save_path = os.path.join(SAVE_DIR, save_filename)
-        cv2.imwrite(save_path, original_image)
+        save_filename, save_path = save_image(kanna_value, original_image)
 
         return render_template('result.html', filename=save_filename, kanna_value=kanna_value)
 
