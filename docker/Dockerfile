@@ -22,6 +22,7 @@ COPY ./image_process.py .
 COPY ./logger.py .
 COPY ./measure.py .
 COPY ./config.py .
+COPY ./image.py .
 
 COPY ./templates/ ./templates
 COPY ./storage/ ./storage
