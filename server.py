@@ -43,14 +43,14 @@ def index():
 def send_js(path):
     return send_from_directory(save_dir, path)
 
-# @velocity_measurement
+@velocity_measurement
 def read_image(image):
     stream = image.stream
     img_array = np.asarray(bytearray(stream.read()), dtype=np.uint8)
     img = cv2.imdecode(img_array, 1)
     return img
 
-# @velocity_measurement
+@velocity_measurement
 def save_image(kanna_value, original_image):
     # リサイズ
     width = 200

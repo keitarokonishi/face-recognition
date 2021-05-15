@@ -9,7 +9,7 @@ from config import model_path
 cascade = cv2.CascadeClassifier(cascade_path)
 model = load_model(model_path)
 
-# @velocity_measurement
+@velocity_measurement
 def culc_kanna_value(face_list: list, image):
     for (x, y, w, h) in face_list:
         image = image[y:y+h, x:x+w]
@@ -24,12 +24,12 @@ def culc_kanna_value(face_list: list, image):
 
     return image, kanna_value
 
-# @velocity_measurement
+@velocity_measurement
 def get_face_list(image):
     # 顔認識の実行
     return cascade.detectMultiScale(image, scaleFactor=1.1, minNeighbors=1, minSize=(100, 100))
 
-# @velocity_measurement
+@velocity_measurement
 def pred_kanna(image):
     face_list = get_face_list(image)
     original_image = image
