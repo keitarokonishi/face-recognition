@@ -14,9 +14,21 @@ from datetime import datetime
 from measure import velocity_measurement
 from image_process import pred_kanna
 from config import save_dir
+from config import log_dir
+from config import measured_dir
+from config import model_dir
 
 if not os.path.isdir(save_dir):
     os.mkdir(save_dir)
+
+if not os.path.isdir(log_dir):
+    os.mkdir(log_dir)
+
+if not os.path.isdir(measured_dir):
+    os.mkdir(measured_dir)
+
+if not os.path.isdir(model_dir):
+    os.mkdir(model_dir)
 
 app = Flask(__name__, static_url_path="")
 
