@@ -13,6 +13,7 @@ from datetime import datetime
 """ private module """
 from measure import velocity_measurement
 from image_process import pred_kanna
+from logger import create_logfile
 from config import save_dir
 from config import log_dir
 from config import measured_dir
@@ -82,7 +83,5 @@ def upload():
 if __name__ == '__main__':
     app.debug = True
     port = int(os.environ.get("PORT", 5000))
-
-    logger.create_logfile()
-
+    create_logfile()
     app.run(host='0.0.0.0', port=port)
