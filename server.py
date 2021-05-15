@@ -1,18 +1,22 @@
+""" exce function """
+# coding: utf-8
+
+""" public module """
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import numpy as np
 import cv2
-from image_process import pred_kanna
-from datetime import datetime
 import os
 import string
 import random
+from datetime import datetime
 
-import logger
+""" private module """
 from measure import velocity_measurement
+from image_process import pred_kanna
+from config import save_dir
 
-SAVE_DIR = "./images"
-if not os.path.isdir(SAVE_DIR):
-    os.mkdir(SAVE_DIR)
+if not os.path.isdir(save_dir):
+    os.mkdir(save_dir)
 
 app = Flask(__name__, static_url_path="")
 
@@ -21,11 +25,11 @@ def random_str(n):
 
 @app.route('/')
 def index():
-    return render_template('index.html', images=os.listdir(SAVE_DIR)[::-1])
+    return render_template('index.html', images=os.listdir(save_dir)[::-1])
 
 @app.route('/images/<path:path>')
 def send_js(path):
-    return send_from_directory(SAVE_DIR, path)
+    return send_from_directory(save_dir, path)
 
 # @velocity_measurement
 def read_image(image):
@@ -43,7 +47,7 @@ def save_image(kanna_value, original_image):
     
     dt_now = str(kanna_value) + "_original_" + datetime.now().strftime("%Y_%m_%d%_H_%M_%S_") + random_str(5)
     save_filename = dt_now + ".png"
-    save_path = os.path.join(SAVE_DIR, save_filename)
+    save_path = os.path.join(save_dir, save_filename)
     cv2.imwrite(save_path, original_image)
 
     return save_filename, save_path

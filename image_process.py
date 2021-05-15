@@ -3,10 +3,11 @@ import numpy as np
 from keras.models import load_model
 
 from measure import velocity_measurement
+from config import cascade_path
+from config import model_path
 
-cascadePath = './haarcascade_frontalface_alt.xml'
-cascade = cv2.CascadeClassifier(cascadePath)
-model = load_model('./my_model.h5')
+cascade = cv2.CascadeClassifier(cascade_path)
+model = load_model(model_path)
 
 # @velocity_measurement
 def culc_kanna_value(face_list: list, image):

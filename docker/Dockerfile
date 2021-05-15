@@ -11,16 +11,19 @@ RUN pip install Flask==1.1.1 \
     && pip install h5py==2.10.0 \
     && pip install tensorflow-cpu==2.4.1
 RUN mkdir templates
+RUN mkdir storage
+RUN mkdir storage/models
+RUN mkdir storage/logs
+RUN mkdir storage/measured
+RUN mkdir storage/images
 
 COPY ./server.py .
 COPY ./image_process.py .
 COPY ./logger.py .
 COPY ./measure.py .
-COPY ./templates/ ./templates
-COPY ./my_model.h5 ./my_model.h5
-COPY ./haarcascade_frontalface_alt.xml ./haarcascade_frontalface_alt.xml
+COPY ./config.py .
 
-COPY ./storage/logs ./storage/logs
-COPY ./storage/measured ./storage/measured
+COPY ./templates/ ./templates
+COPY ./storage/ ./storage
 
 CMD ["python", "server.py"]
