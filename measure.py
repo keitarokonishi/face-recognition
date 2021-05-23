@@ -18,6 +18,7 @@ def velocity_measurement(func):
         result = func(*args,**kwargs)
         end_time = time.time()
         run_time =  end_time - strat_time
-        write_velocity("./storage/measured", f"measurement_log_{d_today}.txt", f"[{dt_now}] {func.__name__}:{run_time}[s]\n")
+        # write_velocity("./storage/measured", f"measurement_log_{d_today}.txt", f"[{dt_now}] {func.__name__}:{run_time}[s]\n")
+        write_velocity("./storage/measured", f"measurement_log_{d_today}.txt", f"[{dt_now}] {func.__name__.ljust(20)}:{run_time}[s]\n")
         return result
     return wrapper
